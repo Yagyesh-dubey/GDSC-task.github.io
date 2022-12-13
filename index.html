@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travello</title>
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|ZCOOL+XiaoWei|Merriweather:400,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/app.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js" defer></script>
+</head>
+
+<body>
+    <header class="site-header sans-serif">
+        <div class="container">
+            <nav>
+                <div class="logo serif-fancy">
+                    <i class="las la-mountain la-lg"></i> Travello</div>
+
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Explore</a></li>
+                    <li><a href="#">Travel</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </nav>
+
+            <section class="site-header-title">
+                <h1 class="serif-fancy">Let's Make <br> Your Best <br>Trip Ever </h1>
+                <p class="subtitle">The best travel for your journey <br>
+                    respectful of the environment</p>
+            </section>
+            <article class="cta">
+                <div class="tabs" x-data="{tab: 'one-way'}">
+                    <div class="tab" :class="{'active' : tab === 'one-way'}" @click="tab = 'one-way'">One way</div>
+                    <div class="tab" :class="{'active' : tab === 'round-trip'}" @click="tab = 'round-trip'">Round Trip
+                    </div>
+                    <div class="tab" :class="{'active' : tab === 'multi'}" @click="tab = 'multi'">Multi - City</div>
+                </div>
+                <div class="tabs-content">
+                    <div id="tab-oneway" class="panel">
+                        <form action="#" method="get" class="panel-form">
+                            <div class="form-col">
+                                <div>From</div>
+                                <select class="input" name="from">
+                                    <option value="Indonesia">Indonesia</option>
+                                    <option value="Italy">Italy</option>
+                                    <option value="Spain">Spain</option>
+                                </select>
+                            </div>
+                            <div class="form-col">
+                                <div>To</div>
+                                <select class="input" name="to">
+                                    <option value="South Korea">South Korea</option>
+                                    <option value="Indonesia">Indonesia</option>
+                                    <option value="Italy">Italy</option>
+                                    <option value="Spain">Spain</option>
+                                </select>
+                            </div>
+                            <div class="form-col">
+                                <div>Expected Date</div>
+                                <input type="date" name="date" class="input">
+                            </div>
+                            <div class="form-col" style="justify-content: flex-end;">
+                                <input type="submit" value="SEARCH" class="btn">
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </article>
+
+        </div>
+    </header>
+    <main class="main-wrap sans-serif">
+        <section class="section section--popular">
+            <div class="container" x-data="popularSlide()">
+                <div class="section__header">
+                    <h2 class="serif">Popular Destinations</h2>
+                    <p>
+                        From historical cities to natural splendours, come see the best
+                        of the world!
+                        <span class="slide-buttons-wrap">
+                            <i class="las la-angle-left slide-btn" @click="left()"></i>
+                            <i class="las la-angle-right slide-btn slide-btn--dark" @click="right()"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="grid grid--popular">
+                    <article class="card card--popular" id="card-1" :style="style()">
+                        <h4>
+                            Millenium Bridge
+                        </h4>
+                        <div class="location">
+                            <i class="las la-map-marker la-lg"></i>
+                            London, United Kingdom
+                        </div>
+                    </article>
+
+                    <article class="card card--popular" id="card-2" :style="style()">
+                        <h4>
+                            Sahara Desert
+                        </h4>
+                        <div class="location">
+                            <i class="las la-map-marker la-lg"></i>
+                            Merzouga, Morocco
+                        </div>
+                    </article>
+                    <article class="card card--popular" id="card-3" :style="style()">
+                        <h4>
+                            Gyenoubobkoug Palace
+                        </h4>
+                        <div class="location">
+                            <i class="las la-map-marker la-lg"></i>
+                            Seoul, South Korea
+                        </div>
+                    </article>
+                    <article class="card card--popular" id="card-4" :style="style()">
+                        <h4>
+                            Kuta Beach
+                        </h4>
+                        <div class="location">
+                            <i class="las la-map-marker la-lg"></i>
+                            Bali, Indonesia
+                        </div>
+                    </article>
+                    <article class="card card--popular" id="card-1" :style="style()">
+                        <h4>
+                            Millenium Bridge
+                        </h4>
+                        <div class="location">
+                            <i class="las la-map-marker la-lg"></i>
+                            London, United Kingdom
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="section section--offers">
+            <div class="container">
+                <div class="section__header section__header--center">
+                    <h2 class="serif">Special Offers</h2>
+                    <p>Check out our special offers tour
+                    </p>
+                </div>
+            </div>
+
+            <div class="offer-slide-wrap">
+                <i class="las la-angle-left slide-btn"></i>
+                <div class="container">
+                    <div class="grid grid--offers">
+                        <article class="card card--offer">
+                            <img src="./assets/india.jpeg" alt="Arga, India" class="offer__img">
+                            <div class="offer__content">
+                                <h3>Arga, India</h3>
+                                <div class="offer__rating">
+                                    <i class="las la-star"></i>
+                                    <i class="las la-star"></i>
+                                    <i class="las la-star"></i>
+                                    <i class="las la-star"></i>
+                                    <i class="las la-star"></i>
+                                </div>
+                                <div class="offer__details">
+                                    <div>From <span class="offer__price">$500</span></div>
+                                    <a class="btn">DETAILS</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="card card--offer">
+                            <img src="./assets/athens.jpeg" alt="" class="offer__img">
+                            <div class="offer__content">
+                                <h3>Athene, Greece</h3>
+                                <div class="offer__rating">
+                                    <i class="las la-star"></i>
+                                    <i class="las la-star"></i>
+                                    <i class="las la-star"></i>
+                                    <i class="las la-star"></i>
+                                </div>
+                                <div class="offer__details">
+                                    <div>From <span class="offer__price">$800</span></div>
+                                    <a class="btn">DETAILS</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="card card--offer">
+                            <img src="./assets/istanbul.jpeg" alt="" class="offer__img">
+                            <div class="offer__content">
+                                <h3>Istanbul, Turkey</h3>
+                                <div class="offer__rating">
+                                    <i class="las la-star"></i>
+                                    <i class="las la-star"></i>
+                                    <i class="las la-star"></i>
+                                    <i class="las la-star"></i>
+                                    <i class="las la-star"></i>
+                                </div>
+                                <div class="offer__details">
+                                    <div>From <span class="offer__price">$600</span></div>
+                                    <a class="btn">DETAILS</a>
+                                </div>
+                            </div>
+                        </article>
+
+                    </div>
+
+                </div>
+                <i class="las la-angle-right slide-btn slide-btn--dark"></i>
+            </div>
+        </section>
+        <section class="section section--blog">
+            <div class="container">
+                <div class="section__header section__header--center">
+                    <h2 class="serif">Our Blogs</h2>
+                    <p>An insight to the incredible experiences <br> in the world</p>
+                </div>
+                <div class="grid grid--blog">
+                    <article class="card card--blog card--featured">
+                        <div class="card__img" style="background-image: url('./assets/bali.jpeg');"></div>
+                        <div class="card__content">
+                            <h3 class="card__title">Wonderful Bali! Try new experiences in there!</h3>
+                            <p class="card__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
+                                necessitatibus natus
+                                distinctio corporis consequuntur? Nobis obcaecati distinctio corporis consequuntur?
+                                Nobis
+                                obcaecati quas dignissimos porro ratione vitae minus
+                                nam aspernatur perspiciatis quos reiciendis.</p>
+                            <a href="#" class="card__link">Read More ></a>
+                        </div>
+                    </article>
+                    <article class="card card--blog card--side">
+                        <div class="card__img" style="background-image: url('./assets/italy.jpeg');"></div>
+                        <div class="card__content">
+                            <h3 class="card__title">Beautiful Italy. Lets go travelling!</h3>
+                            <p class="card__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
+                                necessitatibus natus </p>
+                            <a href="#" class="card__link">Read More ></a>
+                        </div>
+                    </article>
+
+                    <article class="card card--blog card--side">
+                        <div class="card__img" style="background-image: url('./assets/eiffel.jpeg');"></div>
+                        <div class="card__content">
+                            <h3 class="card__title">Romantic moments under Eiffel Tower</h3>
+                            <p class="card__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
+                                necessitatibusue, sequi hic.
+                            </p>
+                            <a href="#" class="card__link">Read More ></a>
+                        </div>
+                    </article>
+
+                    <article class="card card--blog card--side">
+                        <div class="card__img" style="background-image: url('./assets/land.jpeg');"></div>
+                        <div class="card__content">
+                            <h3 class="card__title">New experiences on desert island with your friends</h3>
+                            <p class="card__text">Debitis
+                                necessitatibus natus
+                                nam aspernatur perspiciatis quos reiciendis.</p>
+                            <a href="#" class="card__link">Read More ></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="section section--gallery">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="serif">Destination Gallery</h2>
+                    <p>Our photo gallery on trip</p>
+                </div>
+                <div class="grid grid--gallery">
+                    <img src="./assets/bali.jpeg" alt="" class="card card--gallery">
+                    <img src="./assets/milen-bridge.jpeg" alt="" class="card card--gallery">
+                    <img src="./assets/india.jpeg" alt="" class="card card--gallery">
+                    <img src="./assets/athens.jpeg" alt="" class="card card--gallery">
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="newsletter">
+                    <h2 class="newsletter__title serif">our newsletter</h2>
+                    <form action="#" class="newsletter-form">
+                        <label for="email" class="label label--block">Enter your email</label>
+                        <input name="email" type="email" class="input input--bg" placeholder="example@gmail.com"
+                            required>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="footer__col">
+                        <div class="footer__header">
+                            <div class="footer__col">
+                                <div class="footer__header">
+                                    <div class="logo serif-fancy">
+                                        <i class="las la-mountain la-lg"></i> Travello</div>
+                                </div>
+                                <ul class="row">
+                                    <li> <a href="#"><i class="lab la-facebook-f la-2x"></i> </a></li>
+                                    <li> <a href="#"><i class="lab la-twitter la-2x"></i> </a></li>
+                                    <li> <a href="#"><i class="lab la-instagram la-2x"></i> </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer__col">
+                        <div class="footer__header">Information</div>
+                        <ul class="footer__list">
+                            <li><a href="#" class="footer__link">Home</a></li>
+                            <li><a href="#" class="footer__link">Explore</a></li>
+                            <li><a href="#" class="footer__link">Travel</a></li>
+                            <li><a href="#" class="footer__link">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <div class="footer__header">Helpful Links</div>
+                        <ul class="footer__list">
+                            <li><a href="#" class="footer__link">Destinations</a></li>
+                            <li><a href="#" class="footer__link">Supports</a></li>
+                            <li><a href="#" class="footer__link">Terms & Condition</a></li>
+                            <li><a href="#" class="footer__link">Privacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <div class="footer__header">Contact</div>
+                        <ul class="footer__list">
+                            <li><a href="#" class="footer__link">+62 21 6543 4173</a></li>
+                            <li><a href="#" class="footer__link"></a>info@travello.com</li>
+                            <li><a href="#" class="footer__link"></a></li>
+                            <li><a href="#" class="footer__link"></a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col payment">
+                        <div class="footer__header">Payment</div>
+                        <ul class="row">
+                            <li> <a href="#"><i class="lab la-stripe la-3x"></i> </a></li>
+                            <li> <a href="#"><i class="lar la-money-bill-alt la-3x"></i> </a></li>
+                            <li> <a href="#"><i class="las la-id-card la-3x"></i> </a></li>
+                        </ul>
+                        <ul class="row">
+                            <li> <a href="#"><i class="lab la-stripe la-3x"></i> </a></li>
+                            <li> <a href="#"><i class="lar la-money-bill-alt la-3x"></i> </a></li>
+                            <li> <a href="#"><i class="las la-id-card la-3x"></i> </a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script>
+        function popularSlide() {
+            return {
+                slide: 0,
+                // for demo purpose stop after a number of moves 
+                left() {
+                    this.slide + 1 < 8 ? this.slide++ : this.slide;
+                },
+                right() {
+                    this.slide - 1 > -5 ? this.slide-- : this.slide;
+                },
+                style() {
+                    return `transform: translateX(${-150 * this.slide}px`;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
